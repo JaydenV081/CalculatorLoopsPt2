@@ -10,66 +10,113 @@ Create a menu driven program that allows the user to select what arithmetic oper
 
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <string>
+#include <cmath>
 
 using namespace std;
 
-int main () {
+void displayMenu ();
+void displayResults (double result);
+double sum (double num1, double num2);
+double difference (double num1, double num2);
+double product (double num1, double num2);
+double quotient (double num1, double num2);
+double modulo (double num1, double num2);
+double power (double num1, double num2);
 
-    int choice;
-    double num1, num2;
-    double result = 1;
+int main () {
 
     bool repeat = true;
 
     do {
-        cout << "Enter a digit corresponding to the operation: " << endl;
-        cout << "1. Addition \n2. Subtraction \n3. Multiplication \n4. Division \n5. Modulo \n6. Power \n7. (Exit Code)" << endl;
+        int choice;
+        double num1, num2;
 
+        double result = 1;
+
+        // Displays menu and gets user choice
+        displayMenu();
         cin >> choice;
 
+        // Calculates result based on the two values and chosen operation
         switch (choice) {
             case 1: cout << "Addition" << endl;
-                cout << "Please enter two numbers with space between" << endl;
+                cout << "Please enter two numbers with space between: ";
                 cin >> num1 >> num2;
-                result = num1 + num2;
+                result = sum(num1, num2);
                 break;
             case 2: cout << "Subtraction" << endl;
-                cout << "Please enter two numbers with space between" << endl;
+                cout << "Please enter two numbers with space between: ";
                 cin >> num1 >> num2;
-                result = num1 - num2;
+                result = difference(num1, num2);
                 break;
             case 3: cout << "Multiplication" << endl;
-                cout << "Please enter two numbers with space between" << endl;
+                cout << "Please enter two numbers with space between: ";
                 cin >> num1 >> num2;
-                result = num1 * num2;
+                result = product(num1, num2);
                 break;
             case 4: cout << "Division" << endl;
-                cout << "Please enter two numbers with space between" << endl;
+                cout << "Please enter two numbers with space between: ";
                 cin >> num1 >> num2;
-                result = num1 / num2;
+                result = quotient(num1, num2);
                 break;
             case 5: cout << "Modulo" << endl;
-                cout << "Please enter two numbers with space between" << endl;
+                cout << "Please enter two numbers with space between: ";
                 cin >> num1 >> num2;
-                result = static_cast<int>(num1) % static_cast<int>(num2);
+                result = modulo(num1, num2);
                 break;
             case 6: cout << "Power" << endl;
-                cout << "Please enter two numbers with space between" << endl;
+                cout << "Please enter two numbers with space between: ";
                 cin >> num1 >> num2;
-                for (int count = 0; count < num2; count++) {
-                    result *= num1;
-                }
+                result = power(num1, num2);
                 break;
             case 7: cout << "Exiting program";
                 return 0;
-            default: cout << "Please a enter a valid choice";
+            default: cout << "Please a enter a valid choice! " << endl;
                 break;
         }
-        cout << "The answer to your function is " << result << endl;
-        cout << "----------------------" << endl;
+        // If choice is valid, then results are displayed
+        // If invalid, results are skipped and user has to enter new choice
+        if (choice > 1 || choice <= 7) {
+            displayResults(result);
+        }
+    // Repeats until user enters 7 as choice, ending program
     } while (repeat);
 
     return 0;
+}
+
+void displayMenu() {
+    cout << "Enter a digit corresponding to the operation: " << endl;
+    cout << "1. Addition \n2. Subtraction \n3. Multiplication \n4. Division \n5. Modulo \n6. Power \n7. (Exit Code)" << endl;
+}
+
+void displayResults (double result) {
+    cout << "The answer to your function is " << result << endl;
+    cout << "----------------------" << endl;
+}
+
+// Addition
+double sum (double num1, double num2) {
+    return num1 + num2;
+}
+// Subtraction
+double difference (double num1, double num2) {
+    return num1 - num2;
+}
+// Multiplication
+double product (double num1, double num2) {
+    return num1 * num2;
+}
+// Quotient
+double quotient (double num1, double num2) {
+    return num1 / num2;
+}
+// Modulo
+double modulo (double num1, double num2) {
+    return static_cast<int>(num1) % static_cast<int>(num2);
+}
+// Power
+double power (double num1, double num2) {
+    return pow(num1, num2);
 }
